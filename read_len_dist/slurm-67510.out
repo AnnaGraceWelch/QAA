@@ -1,0 +1,23 @@
+	Command being timed: "/projects/bgmp/agwel/bioinfo/Bi623/QAA/read_len_dist/rlen_dist.py -r1 /projects/bgmp/agwel/bioinfo/Bi623/QAA/trimmomatic/23_4A_R1.trimmed.fastq.gz -r2 /projects/bgmp/agwel/bioinfo/Bi623/QAA/trimmomatic/23_4A_R2.trimmed.fastq.gz -o1 /projects/bgmp/agwel/bioinfo/Bi623/QAA/read_len_dist/23_4A_R1.len.dist.tsv -o2 /projects/bgmp/agwel/bioinfo/Bi623/QAA/read_len_dist/23_4A_R2.len.dist.tsv -o3 /projects/bgmp/agwel/bioinfo/Bi623/QAA/read_len_dist/23_4A.readlength.dist"
+	User time (seconds): 319.31
+	System time (seconds): 2.11
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 5:24.25
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2033384
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 47524
+	Voluntary context switches: 2467
+	Involuntary context switches: 2892
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

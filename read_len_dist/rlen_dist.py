@@ -57,7 +57,7 @@ plt.xlabel("Read Lengths")
 plt.legend()
 plt.yscale("log")
 plt.ylabel('Frequency')
-plt.title("Read Length Distribution")
+plt.title("22_3H_both_S16_L008 Trimmed Read Length Distribution")
 plt.savefig(f'{args.output3}.png') 
                 
 
