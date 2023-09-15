@@ -1,0 +1,470 @@
+QAA Assignment
+
+------------------
+September 6, 2023
+------------------
+
+Assigned libraries were found at this path: 
+    /projects/bgmp/shared/Bi623/QAA_data_assignments.txt
+
+My assigned libraries were:     
+    23_4A_control_S17_L008_R1_001.fastq.gz	22_3H_both_S16_L008_R1_001.fastq.gz
+    23_4A_control_S17_L008_R2_001.fastq.gz  22_3H_both_S16_L008_R2_001.fastq.gz
+
+Absolute paths of library files are: 
+    /projects/bgmp/shared/2017_sequencing/demultiplexed/22_3H_both_S16_L008_R1_001.fastq.gz
+    /projects/bgmp/shared/2017_sequencing/demultiplexed/22_3H_both_S16_L008_R2_001.fastq.gz
+
+    /projects/bgmp/shared/2017_sequencing/demultiplexed/23_4A_control_S17_L008_R1_001.fastq.gz
+    /projects/bgmp/shared/2017_sequencing/demultiplexed/23_4A_control_S17_L008_R2_001.fastq.gz
+
+
+I ran fastqc on both libraries to generate per-base quality score distributions. 
+I also used it to generate per-base N content plots to see if they were consistent with the quality scores. 
+
+FASTQC 
+==================================================================================================================
+All scripts and files for this section are found at:
+    /projects/bgmp/agwel/bioinfo/Bi623/QAA/fastqc_out
+
+To search for the fastqc module:
+    $ module spider fastqc 
+
+To load the fastqc module:
+    $ module load fastqc/0.11.5
+
+Link to fastqc manual pages:
+    https://manpages.ubuntu.com/manpages/trusty/man1/fastqc.1.html
+
+I used the above link to determine how to run fastqc. 
+
+I created the fastqc.sh script in order to run fastqc on both libraries.  
+This script is found at /projects/bgmp/agwel/bioinfo/Bi623/QAA/fastqc_out/fastqc.sh on Talapas.
+The commands within that script are shown below. 
+
+    $ fastqc -o /projects/bgmp/agwel/bioinfo/Bi623/QAA/fastqc_out \
+/projects/bgmp/shared/2017_sequencing/demultiplexed/22_3H_both_S16_L008_R1_001.fastq.gz \
+/projects/bgmp/shared/2017_sequencing/demultiplexed/22_3H_both_S16_L008_R2_001.fastq.gz
+
+The user bin time information from this:
+    Slurm log file: slurm-52392.out
+    	Command being timed: "fastqc -o /projects/bgmp/agwel/bioinfo/Bi623/QAA/fastqc_out /projects/bgmp/shared/2017_sequencing/demultiplexed/22_3H_both_S16_L008_R1_001.fastq.gz /projects/bgmp/shared/2017_sequencing/demultiplexed/22_3H_both_S16_L008_R2_001.fastq.gz"
+        User time (seconds): 39.79
+        System time (seconds): 1.99
+        Percent of CPU this job got: 97%
+        Elapsed (wall clock) time (h:mm:ss or m:ss): 0:42.64
+        Maximum resident set size (kbytes): 376256
+        Exit status: 0
+
+    $ fastqc -o /projects/bgmp/agwel/bioinfo/Bi623/QAA/fastqc_out \
+/projects/bgmp/shared/2017_sequencing/demultiplexed/23_4A_control_S17_L008_R1_001.fastq.gz \
+/projects/bgmp/shared/2017_sequencing/demultiplexed/23_4A_control_S17_L008_R2_001.fastq.gz
+
+The user bin time information from this:
+    Slurm log file: slurm-52392.out
+    	Command being timed: "fastqc -o /projects/bgmp/agwel/bioinfo/Bi623/QAA/fastqc_out /projects/bgmp/shared/2017_sequencing/demultiplexed/23_4A_control_S17_L008_R1_001.fastq.gz /projects/bgmp/shared/2017_sequencing/demultiplexed/23_4A_control_S17_L008_R2_001.fastq.gz"
+        User time (seconds): 367.75
+        System time (seconds): 17.87
+        Percent of CPU this job got: 100%
+        Elapsed (wall clock) time (h:mm:ss or m:ss): 6:24.30
+        Maximum resident set size (kbytes): 375784
+        Exit status: 0
+
+
+------------------
+September 7, 2023
+------------------
+
+Python Script Quality distributions
+=========================================================================================================
+All scripts and files from this section are found at:
+    /projects/bgmp/agwel/bioinfo/Bi623/QAA/qual_dist
+
+I ran my script from demultiplexing part 1 to compare quality score distributions. 
+script: /projects/bgmp/agwel/bioinfo/Bi622/Demultiplex/Assignment-the-first/part1/part1.py
+
+Shell script to  run part1.py on R1:
+    R1_distribution.sh
+Slurm log file:
+    slurm-71116.out
+
+The user bin time information to create plot for 22_3H_both_S16_L008_R1_001.fastq.gz:
+    Command being timed: "/projects/bgmp/agwel/bioinfo/Bi622/Demultiplex/Assignment-the-first/part1/part1.py -f /projects/bgmp/shared/2017_sequencing/demultiplexed/22_3H_both_S16_L008_R1_001.fastq.gz -o 22_3H_both_S16_L008_R1_001.distribution -l 101"
+	User time (seconds): 58.52
+	System time (seconds): 0.94
+	Percent of CPU this job got: 101%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:58.74
+	Maximum resident set size (kbytes): 68452
+	Exit status: 0
+
+To create plot for 23_4A_control_S17_L008:
+    Command being timed: "/projects/bgmp/agwel/bioinfo/Bi622/Demultiplex/Assignment-the-first/part1/part1.py -f /projects/bgmp/shared/2017_sequencing/demultiplexed/23_4A_control_S17_L008_R1_001.fastq.gz -o 23_4A_control_S17_L008_R1_001.distribution -l 101"
+	User time (seconds): 634.99
+	System time (seconds): 1.75
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 10:37.72
+	Maximum resident set size (kbytes): 72736
+	Exit status: 0
+
+Shell script to run part1.py on R2:
+    R2_distribution.sh
+Slurm log file:
+    slurm-71117.out
+
+
+To create plot for 22_3H_both_S16_L008_R2:
+    Command being timed: "/projects/bgmp/agwel/bioinfo/Bi622/Demultiplex/Assignment-the-first/part1/part1.py -f /projects/bgmp/shared/2017_sequencing/demultiplexed/22_3H_both_S16_L008_R2_001.fastq.gz -o 22_3H_both_S16_L008_R2_001.distribution -l 101"
+	User time (seconds): 58.98
+	System time (seconds): 0.93
+	Percent of CPU this job got: 101%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:59.19
+	Maximum resident set size (kbytes): 64412
+	Exit status: 0
+
+To create plot for 23_4A_control_S17_L008_R2:
+    Command being timed: "/projects/bgmp/agwel/bioinfo/Bi622/Demultiplex/Assignment-the-first/part1/part1.py -f /projects/bgmp/shared/2017_sequencing/demultiplexed/23_4A_control_S17_L008_R2_001.fastq.gz -o 23_4A_control_S17_L008_R2_001.distribution -l 101"
+	User time (seconds): 631.82
+	System time (seconds): 1.72
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 10:34.38
+	Maximum resident set size (kbytes): 66752
+	Exit status: 0
+
+------------------
+September 9, 2023
+------------------
+
+cutadapt
+==================================================================================================
+All scripts and files for this are found at:
+    /projects/bgmp/agwel/bioinfo/Bi623/QAA/cutadapt_out
+
+I first created a conda environment called bgmp-QAA to install both cutadapt and trimmomatic into. 
+    $ srun --account=bgmp --partition=compute --pty bash #get an interactive session
+    $ srun --account=bgmp --partition=interactive --pty bash 
+    $ conda create -n bgmp-QAA
+    $ conda activate bgmp-QAA
+    $ conda create -n bgmp-QAA cutadapt
+    $ conda install -c bioconda trimmomatic
+
+#!/usr/bin/bash
+
+#SBATCH --account=bgmp                    #REQUIRED: which account to use
+#SBATCH --partition=compute               #REQUIRED: which partition to use
+#SBATCH --cpus-per-task=8            #optional: number of cpus, default is 1
+#SBATCH --mem=16GB                        #optional: amount of memory, default is 4G
+
+Cutadapt commands for paired end reads:
+    cutadapt -a <R1_adapter> -A <R2_adapter> -o <output_file>.fastq.gz <input_file>.fastq.gz
+
+Cut adapt sbatch script: /projects/bgmp/agwel/bioinfo/Bi623/QAA/cutadapt_out/cutadapt.sh
+
+Slurm log file from running cutadapt on both libraries:
+        slurm-67495.out
+
+The usr/bin/time for library 22_3H_both_S16_L008:
+    Command being timed: "cutadapt -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT -o /projects/bgmp/agwel/bioinfo/Bi623/QAA/cutadapt_out/cut_22_3H_both_S16_L008_R1_001.fastq.gz -p /projects/bgmp/agwel/bioinfo/Bi623/QAA/cutadapt_out/cut_22_3H_both_S16_L008_R2_001.fastq.gz /projects/bgmp/shared/2017_sequencing/demultiplexed/22_3H_both_S16_L008_R1_001.fastq.gz /projects/bgmp/shared/2017_sequencing/demultiplexed/22_3H_both_S16_L008_R2_001.fastq.gz"
+	User time (seconds): 90.93
+	System time (seconds): 0.12
+	Percent of CPU this job got: 97%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:33.74
+	Maximum resident set size (kbytes): 39004
+	Exit status: 0
+
+The usr/bin/time for library 23_4A_control_S17_L008:
+    Command being timed: "cutadapt -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT -o /projects/bgmp/agwel/bioinfo/Bi623/QAA/cutadapt_out/cut_23_4A_control_S17_L008_R1_001.fastq.gz -p /projects/bgmp/agwel/bioinfo/Bi623/QAA/cutadapt_out/cut_23_4A_control_S17_L008_R2_001.fastq.gz /projects/bgmp/shared/2017_sequencing/demultiplexed/23_4A_control_S17_L008_R1_001.fastq.gz /projects/bgmp/shared/2017_sequencing/demultiplexed/23_4A_control_S17_L008_R2_001.fastq.gz"
+	User time (seconds): 995.75
+	System time (seconds): 0.91
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 16:41.78
+	Maximum resident set size (kbytes): 47800
+	Exit status: 0
+
+
+trimmomatic
+========================================================================================================================================================
+All scripts and files for this section are found at:
+    /projects/bgmp/agwel/bioinfo/Bi623/QAA/trimmomatic
+
+I then ran trimmomatic on the R1 and R2 files from both libraries output from cutadapt.
+
+Trimmomatic command for paired end reads: 
+    trimmomatic PE <adapter_trimmed_R1_file>  <adapter_trimmed_R2_file> \
+            <library_R1>.trimmed.fastq.gz <library_R1>un.trimmed.fastq.gz \
+            <library_R2>.trimmed.fastq.gz <library_R2>un.trimmed.fastq.gz \
+            LEADING:3 TRAILING:3 SLIDINGWINDOW:5:15 MINLEN:35
+
+Trimmomatic sbatch script: /projects/bgmp/agwel/bioinfo/Bi623/QAA/trimmomatic/trim.sh
+
+Slurm log file from running trimmomatic on both libraries:
+    slurm-67502.out
+
+/usr/bin/time information for 22_3H_both_S16_L008:
+    Command being timed: "trimmomatic PE /projects/bgmp/agwel/bioinfo/Bi623/QAA/cutadapt_out/cut_22_3H_both_S16_L008_R1_001.fastq.gz /projects/bgmp/agwel/bioinfo/Bi623/QAA/cutadapt_out/cut_22_3H_both_S16_L008_R2_001.fastq.gz 22_3H_R1.trimmed.fastq.gz 22_3H_R1un.trimmed.fastq.gz 22_3H_R2.trimmed.fastq.gz 22_3H_R2un.trimmed.fastq.gz LEADING:3 TRAILING:3 SLIDINGWINDOW:5:15 MINLEN:35"
+	User time (seconds): 223.33
+	System time (seconds): 4.58
+	Percent of CPU this job got: 210%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:48.48
+	Maximum resident set size (kbytes): 399704
+	Exit status: 0
+
+/usr/bin/time information for 23_4A_control_S17_L008:
+    Command being timed: "trimmomatic PE /projects/bgmp/agwel/bioinfo/Bi623/QAA/cutadapt_out/cut_23_4A_control_S17_L008_R1_001.fastq.gz /projects/bgmp/agwel/bioinfo/Bi623/QAA/cutadapt_out/cut_23_4A_control_S17_L008_R2_001.fastq.gz 23_4A_R1.trimmed.fastq.gz 23_4A_R1un.trimmed.fastq.gz 23_4A_R2.trimmed.fastq.gz 23_4A_R2un.trimmed.fastq.gz LEADING:3 TRAILING:3 SLIDINGWINDOW:5:15 MINLEN:35"
+	User time (seconds): 2399.11
+	System time (seconds): 46.03
+	Percent of CPU this job got: 212%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 19:09.12
+	Maximum resident set size (kbytes): 399304
+	Exit status: 0
+
+After trimmomatic, I created a python script in order to plot the trimmed read length distributions
+of both R1 and R2 reads on the same plot. 
+    Script: /projects/bgmp/agwel/bioinfo/Bi623/QAA/read_len_dist/rlen_dist.py
+
+To create distribution for 22_3H_both_S16_L008:
+    Slurm log file:
+        slurm-67513.out
+    /usr/bin/time information:
+        Command being timed: "/projects/bgmp/agwel/bioinfo/Bi623/QAA/read_len_dist/rlen_dist.py -r1 /projects/bgmp/agwel/bioinfo/Bi623/QAA/trimmomatic/22_3H_R1.trimmed.fastq.gz -r2 /projects/bgmp/agwel/bioinfo/Bi623/QAA/trimmomatic/22_3H_R2.trimmed.fastq.gz -o1 /projects/bgmp/agwel/bioinfo/Bi623/QAA/read_len_dist/22_3H_R1.len.dist.tsv -o2 /projects/bgmp/agwel/bioinfo/Bi623/QAA/read_len_dist/22_3H_R2.len.dist.tsv -o3 /projects/bgmp/agwel/bioinfo/Bi623/QAA/read_len_dist/22_3H.readlength.dist"
+        User time (seconds): 20.17
+        System time (seconds): 0.35
+        Percent of CPU this job got: 90%
+        Elapsed (wall clock) time (h:mm:ss or m:ss): 0:22.79
+        Maximum resident set size (kbytes): 245804
+        Exit status: 0
+
+To create distribution for 23_4A_control_S17_L008:
+    Slurm log file:
+        slurm-67510.out
+    /usr/bin/time information:
+        Command being timed: "/projects/bgmp/agwel/bioinfo/Bi623/QAA/read_len_dist/rlen_dist.py -r1 /projects/bgmp/agwel/bioinfo/Bi623/QAA/trimmomatic/23_4A_R1.trimmed.fastq.gz -r2 /projects/bgmp/agwel/bioinfo/Bi623/QAA/trimmomatic/23_4A_R2.trimmed.fastq.gz -o1 /projects/bgmp/agwel/bioinfo/Bi623/QAA/read_len_dist/23_4A_R1.len.dist.tsv -o2 /projects/bgmp/agwel/bioinfo/Bi623/QAA/read_len_dist/23_4A_R2.len.dist.tsv -o3 /projects/bgmp/agwel/bioinfo/Bi623/QAA/read_len_dist/23_4A.readlength.dist"
+        User time (seconds): 319.31
+        System time (seconds): 2.11
+        Percent of CPU this job got: 99%
+        Elapsed (wall clock) time (h:mm:ss or m:ss): 5:24.25
+        Maximum resident set size (kbytes): 2033384
+        Exit status: 0
+
+
+General Notes
+=================================================================================================
+SBATCH script heading:
+
+#!/usr/bin/bash
+
+#SBATCH --account=bgmp                    #REQUIRED: which account to use
+#SBATCH --partition=compute               #REQUIRED: which partition to use
+#SBATCH --cpus-per-task=8            #optional: number of cpus, default is 1
+#SBATCH --mem=16GB                        #optional: amount of memory, default is 4G
+
+Sbatch script heading with new bgmp nodes:
+
+#!/usr/bin/bash
+
+#SBATCH --account=bgmp                    #REQUIRED: which account to use
+#SBATCH --partition=bgmp               #REQUIRED: which partition to use
+#SBATCH --cpus-per-task=8            #optional: number of cpus, default is 1
+#SBATCH --mem=16GB                        #optional: amount of memory, default is 4G
+#SBATCH --time1-00:00:00
+
+How to specify arguments for argparse:
+    def get_args():
+    parser = argparse.ArgumentParser(description="Program to retain only reciprocal best hits")
+    parser.add_argument("-f", "--infile1", help="First Blastp output TSV file to parse and retain reciprocal best hits", required=True)
+    parser.add_argument("-f2", "--infile2", help="Second Blastp output file to return RBH")
+    parser.add_argument("-b", "--biomart1", help="TSV file with human gene IDs, protein IDs, and gene names", required=True)
+    parser.add_argument("-b2", "--biomart2", help="TSV file with zebrafish gene IDs, protein IDs, and gene names", required=True)
+    parser.add_argument("-o", "--outfile", help="File to output reciprocal best hits to", required=True)
+    return parser.parse_args()
+
+-------------------
+September 10, 2023
+-------------------
+
+Part 3 
+=======================================================================================================================================================
+Into my bgmp-QAA environment, I installed STAR, numpy, matplotlib, and htseq using conda. 
+
+I activated my environment with:
+    $ conda activate bgmp-QAA
+Install STAR:
+    $ conda install -c bioconda star
+
+Install numpy:
+    $ conda install numpy
+
+Install matplotlib:
+    $ conda install -c conda-forge matplotlib
+
+Install htseq:
+    $ conda install -c bioconda htseq
+
+
+STAR
+=================================================================================================
+All scripts and files for this section are found at:
+    /projects/bgmp/agwel/bioinfo/Bi623/QAA/STAR
+
+
+I found the mouse genome fasta files from Ensembl release 1.10 at:
+    https://ftp.ensembl.org/pub/release-110/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz
+    https://ftp.ensembl.org/pub/release-110/gtf/mus_musculus/Mus_musculus.GRCm39.110.gtf.gz
+
+I put them in this directory:
+    /projects/bgmp/agwel/bioinfo/Bi623/QAA/DB
+
+I built a database from these files using STAR. 
+
+STAR command to build a database:
+    /usr/bin/time -v STAR --runThreadN 8 \
+    --runMode genomeGenerate \
+    --genomeDir <file_name>GRCm39.dna.ens110.STAR_2.7.10b \
+    --genomeFastaFiles <file_name>GRCm39.dna.primary_assembly.fa \
+    --sjdbGTFfile <file_name>GRCm39.110.gtf
+
+This sbatch script can be found at: /projects/bgmp/agwel/bioinfo/Bi623/QAA/STAR/build.sh
+    Slurm log file:
+        slurm-55895.out
+    /usr/bin/time information:
+        Command being timed: "STAR --runThreadN 8 --runMode genomeGenerate --genomeDir /projects/bgmp/agwel/bioinfo/Bi623/QAA/Mus_musculus.GRCm39.dna.ens110.STAR_2.7.10b --genomeFastaFiles /projects/bgmp/agwel/bioinfo/Bi623/QAA/DB/Mus_musculus.GRCm39.dna.primary_assembly.fa --sjdbGTFfile /projects/bgmp/agwel/bioinfo/Bi623/QAA/DB/Mus_musculus.GRCm39.110.gtf"
+        User time (seconds): 4720.34
+        System time (seconds): 54.45
+        Percent of CPU this job got: 97%
+        Elapsed (wall clock) time (h:mm:ss or m:ss): 1:21:36
+        Maximum resident set size (kbytes): 32385908
+        Exit status: 0
+
+My database is found at:
+    /projects/bgmp/agwel/bioinfo/Bi623/QAA/Mus_musculus.GRCm39.dna.ens110.STAR_2.7.10b/
+
+-------------------
+September 11, 2023
+-------------------
+
+Then, I used STAR to align my reads to this database. 
+
+STAR command to align reads to a database:
+    /usr/bin/time -v STAR --runThreadN 8 --runMode alignReads \
+    --outFilterMultimapNmax 3 --outSAMunmapped Within KeepPairs \
+    --alignIntronMax 1000000 --alignMatesGapMax 1000000 --readFilesCommand zcat \
+    --readFilesIn <trimmed_R1_file> <trimmed_R2_file> \
+    --genomeDir <location_of_database_dir>GRCm39.dna.ens110.STAR_2.7.10b \
+    --outFileNamePrefix <prefix_for_all_outfiles>
+
+Sbatch script to align: /projects/bgmp/agwel/bioinfo/Bi623/QAA/STAR/align.sh
+
+Slurm log file for aligning both libraries: 
+    slurm-67517.out
+To align 22_3H_both_S16_L008:
+    /usr/bin/time information:
+        Command being timed: "STAR --runThreadN 8 --runMode alignReads --outFilterMultimapNmax 3 --outSAMunmapped Within KeepPairs --alignIntronMax 1000000 --alignMatesGapMax 1000000 --readFilesCommand zcat --readFilesIn /projects/bgmp/agwel/bioinfo/Bi623/QAA/trimmomatic/22_3H_R1.trimmed.fastq.gz /projects/bgmp/agwel/bioinfo/Bi623/QAA/trimmomatic/22_3H_R2.trimmed.fastq.gz --genomeDir /projects/bgmp/agwel/bioinfo/Bi623/QAA/Mus_musculus.GRCm39.dna.ens110.STAR_2.7.10b --outFileNamePrefix 22_3H_both_S16_L008_"
+        User time (seconds): 185.03
+        System time (seconds): 8.31
+        Percent of CPU this job got: 88%
+        Elapsed (wall clock) time (h:mm:ss or m:ss): 3:38.27
+        Maximum resident set size (kbytes): 27348512
+        Exit status: 0
+
+To align 23_4A_control_S17_L008:
+    /usr/bin/time information:
+        Command being timed: "STAR --runThreadN 8 --runMode alignReads --outFilterMultimapNmax 3 --outSAMunmapped Within KeepPairs --alignIntronMax 1000000 --alignMatesGapMax 1000000 --readFilesCommand zcat --readFilesIn /projects/bgmp/agwel/bioinfo/Bi623/QAA/trimmomatic/23_4A_R1.trimmed.fastq.gz /projects/bgmp/agwel/bioinfo/Bi623/QAA/trimmomatic/23_4A_R2.trimmed.fastq.gz --genomeDir /projects/bgmp/agwel/bioinfo/Bi623/QAA/Mus_musculus.GRCm39.dna.ens110.STAR_2.7.10b --outFileNamePrefix 23_4A_control_S17_L008"
+        User time (seconds): 2340.11
+        System time (seconds): 28.71
+        Percent of CPU this job got: 95%
+        Elapsed (wall clock) time (h:mm:ss or m:ss): 41:31.38
+        Maximum resident set size (kbytes): 27532864
+        Exit status: 0
+
+-------------------
+September 12, 2023
+-------------------
+
+I used my script parse_sam.py to determine mapped and unmapped reads for the SAM files output 
+by aligning my reads to my database.
+Python Script:
+    /projects/bgmp/agwel/bioinfo/Bi623/QAA/STAR/parse_sam.py
+
+Command to run parse_sam.py:
+    /projects/bgmp/agwel/bioinfo/Bi623/QAA/STAR/parse_sam.py -f <SAM file>
+
+Sbatch script that ran it:
+    /projects/bgmp/agwel/bioinfo/Bi623/QAA/STAR/parse_sam.sh
+
+Slurm log file:
+    slurm-67552.out
+
+For 22_3H_both_S16_L008:
+    Mapped Reads: 7503641
+    Unmapped Reads: 114943
+
+For 23_4A_control_S17_L008:
+    Mapped Reads: 77140880
+    Unmapped Reads: 4349528
+
+-------------------
+September 13, 2023
+-------------------
+
+htseq
+=====================================================================================================================
+I ran htseq-count on the aligned SAM files for both libraries once specifying stranded==yes and once with stranded==reverse.
+
+All scripts and output files for this section are at:
+    /projects/bgmp/agwel/bioinfo/Bi623/QAA/ht-seq
+
+Sbatch script:
+    /projects/bgmp/agwel/bioinfo/Bi623/QAA/ht-seq/htseq_count.sh
+Slurm log file:
+    slurm-67554.out
+
+Command to count number of mapped reads in htseq output file:
+    grep "^ENSMUSG" <file_path> | awk '{sum+=$2} END {print sum}'
+
+reverse_22_3H_both_S16_L008.tsv:
+    Mapped: 3394113
+    Nonmapped Reads: 204965
+
+reverse_23_4A_control_S17_L008.tsv:
+    Mapped: 32949127
+    Nonmapped Reads: 4165856
+
+stranded_22_3H_both_S16_L008.tsv
+    Mapped: 145550
+    Nonmapped Reads: 3521004
+    
+stranded_23_4A_control_S17_L008.tsv
+    Mapped: 1549481
+    Nonmapped Reads: 36148685
+
+
+Command to count total reads in htseq output file (even though you can also just look towards the end of the output):
+    awk '{sum+=$2} END {print sum}' <file_path>
+
+reverse_22_3H_both_S16_L008.tsv:
+    Total Reads: 3901127
+    Percent: 87.0 % Mapped
+
+reverse_23_4A_control_S17_L008.tsv:
+    Total Reads: 42056576
+    Percent: 78.3% Mapped
+
+stranded_22_3H_both_S16_L008.tsv:
+    Total Reads: 3901127
+    Percent: 3.7% Mapped
+
+stranded_23_4A_control_S17_L008.tsv:
+    Total Reads: 42056576
+    Percent: 3.7% Mapped
+
+
+General Notes
+==============================================================================================
+Sbatch script heading with new bgmp nodes:
+
+#!/usr/bin/bash
+
+#SBATCH --account=bgmp                    #REQUIRED: which account to use
+#SBATCH --partition=bgmp               #REQUIRED: which partition to use
+#SBATCH --cpus-per-task=8            #optional: number of cpus, default is 1
+#SBATCH --mem=16GB                        #optional: amount of memory, default is 4G
+#SBATCH --time1-00:00:00
